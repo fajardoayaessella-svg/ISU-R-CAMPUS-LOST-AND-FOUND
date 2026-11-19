@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISU Roxas Campus | Lost and Found</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7f5;
+    color: #26332c;
+}
+
+header {
+    background: #075b35;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-image {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+header h2 {
+    font-size: 21px;
+}
+
+header p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #c6e7d2;
+}
+
+.hero {
+    background: linear-gradient(120deg, #075b35, #16864f);
+    color: white;
+    padding: 65px 7%;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    line-height: 1.7;
+}
+
+.hero button {
+    margin-top: 22px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    color: #075b35;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    padding: 23px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000c;
+    border-left: 5px solid #16864f;
+}
+
+.stat-card h3 {
+    color: #777;
+    font-size: 14px;
+}
+
+.stat-card p {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 12px;
+    color: #075b35;
+}
+
+.panel {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px #0000000c;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select, textarea {
+    padding: 12px;
+    border: 1px solid #d5ddd7;
+    border-radius: 7px;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #16864f;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+button {
+    border: none;
+    background: #08733f;
+    color: white;
+    padding: 12px 19px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .2s;
+}
+
+button:hover {
+    background: #054e2b;
+}
+
+.btn-secondary {
+    background: #64756b;
+}
+
+.btn-danger {
+    background: #c0392b;
+}
+
+.btn-blue {
+    background: #2866a5;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.item-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px #0000000c;
+}
+
+.item-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #e7eee9;
+}
+
+.item-info {
+    padding: 18px;
+}
+
+.item-info h3 {
+    color: #075b35;
+    margin-bottom: 10px;
+}
+
+.item-info p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5d6861;
+    margin-bottom: 6px;
+    overflow-wrap: anywhere;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.Lost {
+    background: #ffe3df;
+    color: #c0392b;
+}
+
+.Found {
+    background: #d9f4e3;
+    color: #08733f;
+}
+
+.Returned {
+    background: #dceaff;
+    color: #2866a5;
+}
+
+.card-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 15px;
+}
+
+.card-buttons button {
+    font-size: 11px;
+    padding: 9px;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+    background: white;
+    border-radius: 10px;
+    grid-column: 1 / -1;
+}
+
+.notice {
+    background: #fff8df;
+    border-left: 4px solid #e5ad32;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#preview {
+    max-width: 160px;
+    max-height: 130px;
+    display: none;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+footer {
+    background: #064b2b;
+    color: white;
+    text-align: center;
+    padding: 28px;
+    margin-top: 50px;
+    line-height: 1.8;
+    font-size: 13px;
+}
+
+@media(max-width: 850px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .items-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav a {
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .stats, .items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    form, .controls {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <img src="ISU LOGO 2026.png"
+             alt="ISU Official Logo"
+             class="logo-image">
+
+        <div>
+            <h2>ISU ROXAS CAMPUS</h2>
+            <p>Lost and Found Management System</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#home">🏠</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#report">Report Item</a>
+        <a href="#items">Items</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<section class="hero" id="home">
+    <h1>Lost Something? Found Something?</h1>
+
+    <p>
+        Welcome to the ISU Roxas Campus Lost and Found System.<br>
+        Helping students reconnect with their lost belongings.
+    </p>
+
+    <button onclick="document.getElementById('report').scrollIntoView({behavior:'smooth'})">
+        Report an Item
+    </button>
+</section>
+
+<div class="container">
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+    <h2 class="section-title">📊 Dashboard Overview</h2>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Reports</h3>
+            <p id="total">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Lost Items</h3>
+            <p id="lostCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Found Items</h3>
+            <p id="foundCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Returned Items</h3>
+            <p id="returnedCount">0</p>
+        </div>
+    </div>
+</section>
+
+<!-- REPORT FORM -->
+<section id="report" class="panel">
+    <h2 class="section-title">📝 Report Lost or Found Item</h2>
+
+    <div class="notice">
+        Please provide accurate information about the item.
+        Do not upload photos showing passwords, ID numbers,
+        or other sensitive personal information.
+    </div>
+
+    <form id="itemForm">
+
+        <div class="form-group">
+            <label>Report Type</label>
+            <select id="type" required>
+                <option value="">Select Report Type</option>
+                <option value="Lost">Lost Item</option>
+                <option value="Found">Found Item</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Item Name</label>
+            <input id="name" type="text"
+                   placeholder="Example: Wallet, Cellphone" required>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <select id="category" required>
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>School Supplies</option>
+                <option>Personal Belongings</option>
+                <option>Clothing</option>
+                <option>Accessories</option>
+                <option>Documents</option>
+                <option>Others</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Date Lost or Found</label>
+            <input id="date" type="date" required>
+        </div>
+
+        <div class="form-group">
+            <label>Location</label>
+            <input id="location" type="text"
+                   placeholder="Example: Library, Classroom" required>
+        </div>
+
+        <div class="form-group">
+            <label>Your Name</label>
+            <input id="reporter" type="text"
+                   placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group full">
+            <label>Contact Information (Email)</label>
+            <input id="contact" type="email"
+                   placeholder="Enter your school email" required>
+        </div>
+
+        <div class="form-group full">
+            <label>Item Description</label>
+            <textarea id="description"
+                placeholder="Describe the item and its identifying details..."
+                required></textarea>
+        </div>
+
+        <div class="form-group full">
+            <label>Upload Item Photo</label>
+            <input id="photo" type="file" accept="image/*">
+            <img id="preview" alt="Image preview">
+        </div>
+
+        <div class="form-group full">
+            <button type="submit">➕ Submit Report</button>
+        </div>
+
+    </form>
+</section>
+
+<!-- ITEMS -->
+<section id="items">
+    <h2 class="section-title">🔎 Lost and Found Items</h2>
+
+    <div class="controls">
+        <input id="search" type="search"
+               placeholder="Search item name, location, or description...">
+
+        <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option>Electronics</option>
+            <option>School Supplies</option>
+            <option>Personal Belongings</option>
+            <option>Clothing</option>
+            <option>Accessories</option>
+            <option>Documents</option>
+            <option>Others</option>
+        </select>
+
+        <select id="filterStatus">
+            <option value="">All Status</option>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+            <option value="Returned">Returned</option>
+        </select>
+    </div>
+
+    <div style="margin-bottom:18px">
+        <button onclick="setStatus('')">All Items</button>
+        <button onclick="setStatus('Lost')" class="btn-danger">Lost</button>
+        <button onclick="setStatus('Found')">Found</button>
+        <button onclick="setStatus('Returned')" class="btn-blue">Returned</button>
+    </div>
+
+    <div class="items-grid" id="itemsGrid"></div>
+</section>
+
+<!-- CLAIM SECTION -->
+<section class="panel">
+    <h2 class="section-title">📦 How to Claim an Item</h2>
+
+    <ol style="padding-left:22px; line-height:2; color:#555">
+        <li>Search for your missing item in the list.</li>
+        <li>Click the Claim Item button.</li>
+        <li>Provide your name and school email.</li>
+        <li>Wait for the Lost and Found staff to verify your request.</li>
+        <li>Present proof of ownership before collecting the item.</li>
+    </ol>
+</section>
+
+<!-- ABOUT -->
+<section class="panel">
+    <h2 class="section-title">ℹ️ About This Website</h2>
+
+    <p style="line-height:1.8;color:#555">
+        The ISU Roxas Campus Lost and Found Management System
+        is designed to help students and campus personnel report,
+        search, and recover lost belongings. It provides an
+        organized platform for managing lost and found reports
+        within the campus.
+    </p>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <h3>ISABELA STATE UNIVERSITY - ROXAS CAMPUS</h3>
+    <p>Lost and Found Item Management System</p>
+    <p>Helping Students Find What They Lost.</p>
+    <p>© 2026 ISU Roxas Campus | School Project</p>
+</footer>
+
+<script>
+
+// LOAD SAVED REPORTS
+let items = JSON.parse(localStorage.getItem("isuItems")) || [];
+let claims = JSON.parse(localStorage.getItem("isuClaims")) || [];
+
+let currentPhoto = "";
+
+// SAVE DATA
+function saveData() {
+    localStorage.setItem("isuItems", JSON.stringify(items));
+    localStorage.setItem("isuClaims", JSON.stringify(claims));
+}
+
+// ESCAPE USER INPUT
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+// IMAGE PREVIEW
+document.getElementById("photo").addEventListener("change", function() {
+    const file = this.files[0];
+    const preview = document.getElementById("preview");
+
+    currentPhoto = "";
+
+    if (!file) {
+        preview.style.display = "none";
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        alert("Please upload an image.");
+        this.value = "";
+        return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+        alert("Image must be 2MB or smaller.");
+        this.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        currentPhoto = e.target.result;
+        preview.src = currentPhoto;
+        preview.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// SUBMIT REPORT
+document.getElementById("itemForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const newItem = {
+        id: "ISU-" + Date.now(),
+        type: document.getElementById("type").value,
+        name: document.getElementById("name").value.trim(),
+        category: document.getElementById("category").value,
+        date: document.getElementById("date").value,
+        location: document.getElementById("location").value.trim(),
+        reporter: document.getElementById("reporter").value.trim(),
+        contact: document.getElementById("contact").value.trim(),
+        description: document.getElementById("description").value.trim(),
+        photo: currentPhoto,
+        status: document.getElementById("type").value,
+        created: Date.now()
+    };
+
+    items.unshift(newItem);
+    saveData();
+    renderItems();
+
+    this.reset();
+    currentPhoto = "";
+    document.getElementById("preview").style.display = "none";
+
+    alert("Your report has been submitted successfully!");
+});
+
+// DASHBOARD COUNTERS
+function updateDashboard() {
+    document.getElementById("total").textContent = items.length;
+
+    document.getElementById("lostCount").textContent =
+        items.filter(i => i.status === "Lost").length;
+
+    document.getElementById("foundCount").textContent =
+        items.filter(i => i.status === "Found").length;
+
+    document.getElementById("returnedCount").textContent =
+        items.filter(i => i.status === "Returned").length;
+}
+
+// FILTER STATUS
+function setStatus(status) {
+    document.getElementById("filterStatus").value = status;
+    renderItems();
+}
+
+// DISPLAY ITEMS
+function renderItems() {
+    const grid = document.getElementById("itemsGrid");
+
+    const search = document.getElementById("search").value.toLowerCase();
+    const category = document.getElementById("filterCategory").value;
+    const status = document.getElementById("filterStatus").value;
+
+    const filtered = items.filter(item => {
+        const text = [
+            item.name,
+            item.location,
+            item.description,
+            item.category
+        ].join(" ").toLowerCase();
+
+        return text.includes(search) &&
+            (!category || item.category === category) &&
+            (!status || item.status === status);
+    });
+
+    grid.innerHTML = "";
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div class="empty">
+                <h3>🔍 No Items Found</h3>
+                <p>Try another search or submit a new report.</p>
+            </div>`;
+    }
+
+    filtered.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+
+        const photo = item.photo ||
+            "https://placehold.co/600x400/e7eee9/075b35?text=No+Image";
+
+        card.innerHTML = `
+            <img src="${photo}" alt="Item photo"
+                 onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+
+            <div class="item-info">
+                <span class="status ${escapeHTML(item.status)}">
+                    ${escapeHTML(item.status)}
+                </span>
+
+                <h3>${escapeHTML(item.name)}</h3>
+
+                <p><b>Item ID:</b> ${escapeHTML(item.id)}</p>
+                <p><b>Category:</b> ${escapeHTML(item.category)}</p>
+                <p><b>Date:</b> ${escapeHTML(item.date)}</p>
+                <p><b>Location:</b> ${escapeHTML(item.location)}</p>
+                <p><b>Description:</b> ${escapeHTML(item.description)}</p>
+                <p><b>Reported by:</b> ${escapeHTML(item.reporter)}</p>
+
+                <div class="card-buttons">
+
+                    <button onclick="claimItem('${escapeHTML(item.id)}')">
+                        Claim Item
+                    </button>
+
+                    <button class="btn-secondary"
+                        onclick="copyID('${escapeHTML(item.id)}')">
+                        Copy ID
+                    </button>
+
+                    ${item.status !== "Returned" ? `
+                    <button class="btn-blue"
+                        onclick="markReturned('${escapeHTML(item.id)}')">
+                        Mark Returned
+                    </button>` : ""}
+
+                    <button class="btn-danger"
+                        onclick="deleteItem('${escapeHTML(item.id)}')">
+                        Delete
+                    </button>
+
+                </div>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+
+    updateDashboard();
+}
+
+// CLAIM ITEM
+function claimItem(id) {
+    const item = items.find(i => i.id === id);
+
+    if (!item) return;
+
+    if (item.status === "Lost") {
+        alert("This item is currently reported as lost, not found.");
+        return;
+    }
+
+    if (item.status === "Returned") {
+        alert("This item has already been returned.");
+        return;
+    }
+
+    const name = prompt("Enter your full name:");
+
+    if (!name || !name.trim()) return;
+
+    const email = prompt("Enter your school email:");
+
+    if (!email || !email.includes("@")) {
+        alert("Please enter a valid email.");
+        return;
+    }
+
+    claims.push({
+        itemID: id,
+        name: name.trim(),
+        email: email.trim(),
+        date: new Date().toISOString()
+    });
+
+    saveData();
+
+    alert("Claim request recorded! Please contact the campus Lost and Found staff for verification.");
+}
+
+// MARK RETURNED
+function markReturned(id) {
+    const item = items.find(i => i.id === id);
+
+    if (!item) return;
+
+    if (item.status !== "Found") {
+        alert("Only found items can be marked as returned.");
+        return;
+    }
+
+    if (confirm("Mark this item as returned?")) {
+        item.status = "Returned";
+        saveData();
+        renderItems();
+    }
+}
+
+// DELETE REPORT
+function deleteItem(id) {
+    if (confirm("Are you sure you want to delete this report?")) {
+        items = items.filter(i => i.id !== id);
+        claims = claims.filter(c => c.itemID !== id);
+
+        saveData();
+        renderItems();
+    }
+}
+
+// COPY ITEM ID
+function copyID(id) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(id)
+            .then(() => alert("Item ID copied!"))
+            .catch(() => prompt("Copy this Item ID:", id));
+    } else {
+        prompt("Copy this Item ID:", id);
+    }
+}
+
+// SEARCH AND FILTER EVENTS
+document.getElementById("search").addEventListener("input", renderItems);
+
+document.getElementById("filterCategory").addEventListener("change", renderItems);
+
+document.getElementById("filterStatus").addEventListener("change", renderItems);
+
+// INITIAL DISPLAY
+renderItems();
+
+</script>
+
+</body>
+</html>
